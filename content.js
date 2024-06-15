@@ -9,7 +9,7 @@ function addSpeedControlInput() {
         speedControlDiv.style.marginRight = '10px';
 
         const speedLabel = document.createElement('span');
-        speedLabel.textContent = 'Play Speed:';
+        speedLabel.textContent = 'Play Speed(0.0625~16):';
         speedLabel.style.marginRight = '8px';
         speedLabel.style.fontSize = '14px';
         speedLabel.style.fontWeight = 'bold';
