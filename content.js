@@ -3,27 +3,59 @@ function addSpeedControlInput() {
     const searchBox = document.querySelector('ytd-searchbox');
     if (searchBox && !document.getElementById('speedControlInput')) {
         const speedControlDiv = document.createElement('div');
-        speedControlDiv.style.display = 'inline-block';
+        speedControlDiv.id = 'speedControlDiv';
+        speedControlDiv.style.display = 'inline-flex';
+        speedControlDiv.style.alignItems = 'center';
         speedControlDiv.style.marginRight = '10px';
+
+        const speedLabel = document.createElement('span');
+        speedLabel.textContent = 'Play Speed:';
+        speedLabel.style.marginRight = '8px';
+        speedLabel.style.fontSize = '14px';
+        speedLabel.style.fontWeight = 'bold';
+        speedLabel.style.color = '#333';
 
         const speedInput = document.createElement('input');
         speedInput.type = 'text';
         speedInput.id = 'speedControlInput';
-        speedInput.placeholder = 'Speed (e.g., 1.5)';
+        speedInput.placeholder = 'e.g., 1.5';
         speedInput.style.padding = '5px';
         speedInput.style.fontSize = '14px';
-        speedControlDiv.appendChild(speedInput);
+        speedInput.style.width = '60px';
+        speedInput.style.border = '1px solid #ccc';
+        speedInput.style.borderRadius = '4px';
+        speedInput.style.marginRight = '5px';
 
-        searchBox.insertAdjacentElement('beforebegin', speedControlDiv);
+        const setSpeedButton = document.createElement('button');
+        setSpeedButton.textContent = 'Set';
+        setSpeedButton.style.padding = '5px 10px';
+        setSpeedButton.style.fontSize = '14px';
+        setSpeedButton.style.border = 'none';
+        setSpeedButton.style.borderRadius = '4px';
+        setSpeedButton.style.backgroundColor = '#ff0000';
+        setSpeedButton.style.color = '#fff';
+        setSpeedButton.style.cursor = 'pointer';
+
+        speedControlDiv.appendChild(speedLabel);
+        speedControlDiv.appendChild(speedInput);
+        speedControlDiv.appendChild(setSpeedButton);
+
+        searchBox.parentNode.insertBefore(speedControlDiv, searchBox);
+
+        const setSpeed = () => {
+            const speed = parseFloat(speedInput.value);
+            if (!isNaN(speed)) {
+                setPlaybackSpeed(speed);
+            }
+        };
 
         speedInput.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
-                const speed = parseFloat(speedInput.value);
-                if (!isNaN(speed)) {
-                    setPlaybackSpeed(speed);
-                }
+                setSpeed();
             }
         });
+
+        setSpeedButton.addEventListener('click', setSpeed);
     }
 }
 
@@ -56,3 +88,10 @@ observer.observe(document.body, { childList: true, subtree: true });
 // Initial call to add the input field and display current speed
 addSpeedControlInput();
 displayCurrentSpeed();
+
+// Listen for video play event to update speed input
+document.addEventListener('play', (event) => {
+    if (event.target.tagName === 'VIDEO') {
+        displayCurrentSpeed();
+    }
+}, true);
