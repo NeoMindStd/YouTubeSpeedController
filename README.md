@@ -9,7 +9,7 @@ YouTube Speed Controller is a Chrome extension that allows users to easily and e
 - Enter custom playback speeds (0.0625x to 16x)
 
 ## Install
-- Visit [chome web store](https://chromewebstore.google.com/detail/youtube-speed-controller/oinbmbpapfolbidkjibjlanmnjkbinia?authuser=0&hl=ko) to install
+- Visit [chome web store](https://chromewebstore.google.com/detail/youtube-speed-controller/oinbmbpapfolbidkjibjlanmnjkbinia?authuser=0&hl=ko), [whale web store](https://store.whale.naver.com/detail/pfbmmdopefghfdlfbbneofohllijgalk) to install
 
 ## Screen
 ![Screen](https://github.com/NeoMindStd/YouTubeSpeedController/blob/main/screenshot.png?raw=true)
